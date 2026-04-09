@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Phishing Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🔐 AI Phishing Detector</h1>
+    <p class="subtitle">Check if a message is safe or a scam</p>
+
+    <form method="POST">
+        <textarea name="message" placeholder="Paste your message here..."></textarea>
+
+        <button type="submit">🔍 Analyze Message</button>
+
+        <p id="loading" style="display:none;">⏳ Analyzing<span id="dots"></span></p>
+    </form>
+
+    {% if result %}
+    <div class="result-box {{ result_class }}">
+        <h2>{{ result }}</h2>
+        <p>{{ explanation }}</p>
+
+        {% if reasons %}
+        <ul>
+            {% for word in reasons %}
+            <li>{{ word }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% if history %}
+
+    <hr class="divider">
+<div class="history-box">
+    <h3>📜 Recent Scans History</h3>
+
+    {% for item in history %}
+    <div class="history-item {{ item.class }}">
+        <p><strong>{{ item.result }}</strong></p>
+        <p>{{ item.text }}</p>
+        <p style="font-size:12px; color:#aaa;">{{ item.time }}</p>
+    </div>
+    {% endfor %}
+
+</div>
+{% endif %}
+
+    <p class="footer">🔐 Built with security in mind by Sourav</p>
+
+</div>
+
+<script>
+    const form = document.querySelector("form");
+    const loadingText = document.getElementById("loading");
+    const dots = document.getElementById("dots");
+
+    form.addEventListener("submit", function() {
+        loadingText.style.display = "block";
+
+        let count = 0;
+        setInterval(() => {
+            count = (count + 1) % 4;
+            dots.innerHTML = ".".repeat(count);
+        }, 500);
+    });
+</script>
+
+</body>
+</html>
