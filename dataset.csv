@@ -1,11 +1,22 @@
 text,label
-"Win money now",phishing
-"Click here to claim prize",phishing
-"Your account is blocked",phishing
-"Send OTP immediately",phishing
-"Free gift card offer",phishing
-"Hello how are you",safe
-"Let's meet tomorrow",safe
-"Call me when free",safe
-"Happy birthday",safe
-"See you soon",safe
+"URGENT! Your bank account is blocked, click here to verify",phishing
+"Win ₹50000 now! Limited time offer click link",phishing
+"Verify your account immediately to avoid suspension",phishing
+"Reset your password using this secure link",phishing
+"You have received cashback reward claim now",phishing
+"Dear user, your KYC is pending update now",phishing
+"Your ATM card has been blocked call immediately",phishing
+"Click here to claim free gift voucher",phishing
+"You won a lottery send your details now",phishing
+"Bank alert: suspicious login verify account",phishing
+
+"Hey bro where are you",safe
+"Let’s meet tomorrow",safe
+"Call me when you are free",safe
+"Happy birthday enjoy your day",safe
+"Please send me the notes",safe
+"Are you coming to class today",safe
+"I will call you later",safe
+"Let’s go for dinner tonight",safe
+"Good morning have a nice day",safe
+"Can you help me with this problem",safe

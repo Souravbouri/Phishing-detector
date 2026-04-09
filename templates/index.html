@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AI Phishing Detector</title>
+    <title>AI Cyber Safety Scanner</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
@@ -9,56 +9,101 @@
 
 <div class="container">
 
-    <h1>🔐 AI Phishing Detector</h1>
-    <p class="subtitle">Check if a message is safe or a scam</p>
+    <!-- TITLE -->
+    <h1>🔐 AI Cyber Safety Scanner</h1>
+    <p class="subtitle">Detect phishing, scam messages, and suspicious links instantly</p>
 
+    <p class="tagline">
+        AI-powered cybersecurity tool to detect phishing, scam messages, and malicious links in real-time.
+    </p>
+
+    <!-- FORM -->
     <form method="POST">
         <textarea name="message" placeholder="Paste your message here..."></textarea>
 
         <button type="submit">🔍 Analyze Message</button>
+        <button type="reset" class="clear-btn">🧹 Clear</button>
 
         <p id="loading" style="display:none;">⏳ Analyzing<span id="dots"></span></p>
     </form>
 
+    <!-- RESULT -->
     {% if result %}
     <div class="result-box {{ result_class }}">
+
         <h2>⚠️ {{ result }}</h2>
+
         <p>{{ explanation }}</p>
+
+        <!-- AI + Rule -->
         <p class="ai">🤖 {{ ai_result }}</p>
         <p class="rule">🔍 {{ rule_result }}</p>
-        <p>Confidence: {{ confidence }}</p>
 
+        <!-- Confidence -->
+        <p><strong>Confidence:</strong> {{ confidence }}</p>
+
+        <!-- Risk Meter -->
+        <p><strong>Risk Level:</strong></p>
+        <div class="risk-bar">
+            <div class="risk-fill {{ result_class }}" style="width: {{ confidence }};"></div>
+        </div>
+
+        <!-- Highlighted Message -->
+        <p><strong>Analyzed Message:</strong></p>
+        <div class="analyzed-box">
+            {{ highlighted_text | safe }}
+        </div>
+
+        <!-- Threat Report -->
+        <p><strong>🛡️ Threat Report:</strong></p>
+        <ul class="threat-report">
+            {% for item in threat_report %}
+            <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+
+        <!-- Reasons -->
         {% if reasons %}
+        <p><strong>Detected Indicators:</strong></p>
         <ul>
             {% for word in reasons %}
             <li>{{ word }}</li>
             {% endfor %}
         </ul>
         {% endif %}
+
+        <!-- Download Button -->
+        <a href="/download" class="download-btn">📄 Download Report</a>
+
     </div>
     {% endif %}
 
+    <!-- HISTORY -->
     {% if history %}
+    <div class="history-box">
+        <h3>📜 Recent Scan History</h3>
 
-    <hr class="divider">
-<div class="history-box">
-    <h3>📜 Recent Scans History</h3>
-
-    {% for item in history %}
-    <div class="history-item {{ item.class }}">
-        <p><strong>{{ item.result }}</strong></p>
-        <p>{{ item.text }}</p>
-        <p style="font-size:12px; color:#aaa;">{{ item.time }}</p>
+        {% for item in history %}
+        <div class="history-item {{ item.class }}">
+            <p><strong>{{ item.result }}</strong></p>
+            <p>{{ item.text }}</p>
+            <p class="time">{{ item.time }}</p>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
+    {% endif %}
+
+    <!-- DISCLAIMER -->
+    <p class="disclaimer">
+        ⚠️ This tool provides analysis based on AI and pattern detection. Always verify sensitive information manually.
+    </p>
+
+    <!-- FOOTER -->
+    <p class="footer">🛡️ Built by Sourav | Cyber Safety Project</p>
 
 </div>
-{% endif %}
 
-    <p class="footer">🔐 Built with security in mind by Sourav</p>
-
-</div>
-
+<!-- LOADING SCRIPT -->
 <script>
     const form = document.querySelector("form");
     const loadingText = document.getElementById("loading");

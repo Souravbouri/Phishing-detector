@@ -6,7 +6,7 @@ from sklearn.naive_bayes import MultinomialNB
 data = pd.read_csv("dataset.csv")
 
 # Convert text to numbers
-vectorizer = TfidfVectorizer()
+vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1,2))
 X = vectorizer.fit_transform(data["text"])
 
 y = data["label"]
@@ -18,4 +18,5 @@ model.fit(X, y)
 def predict_message(message):
     msg_vector = vectorizer.transform([message])
     prediction = model.predict(msg_vector)[0]
-    return prediction
+    probability = model.predict_proba(msg_vector).max()
+    return prediction, probability
