@@ -22,8 +22,11 @@
 
     {% if result %}
     <div class="result-box {{ result_class }}">
-        <h2>{{ result }}</h2>
+        <h2>⚠️ {{ result }}</h2>
         <p>{{ explanation }}</p>
+        <p class="ai">🤖 {{ ai_result }}</p>
+        <p class="rule">🔍 {{ rule_result }}</p>
+        <p>Confidence: {{ confidence }}</p>
 
         {% if reasons %}
         <ul>

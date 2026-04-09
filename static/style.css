@@ -173,3 +173,12 @@ li {
     transform: scale(1.01);
     transition: 0.2s;
 }
+.ai {
+    color: #00c6ff;
+    font-weight: bold;
+}
+
+.rule {
+    color: #ffd700;
+    font-weight: bold;
+}
