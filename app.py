@@ -7,6 +7,7 @@ from reportlab.lib.pagesizes import letter
 from io import BytesIO
 from flask import send_file
 import re
+import os
 
 
 app = Flask(__name__)
@@ -246,4 +247,4 @@ def home():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=10000)
+     app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 10000)))
